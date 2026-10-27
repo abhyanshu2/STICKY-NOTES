@@ -1,0 +1,246 @@
+
+
+<!-- MOBILE OVERLAY -->
+<div id="mob-overlay"></div>
+
+<!-- SIDEBAR -->
+<nav id="sidebar">
+  <div class="sb-logo">
+    <span class="sb-logo-text">Notiq</span>
+    <div class="sb-logo-sub">Your notes & tasks, organized.</div>
+  </div>
+  <div class="sb-nav">
+    <div class="nav-section">Menu</div>
+    <div class="nav-item active" data-panel="dashboard">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
+    </div>
+    <div class="nav-item" data-panel="notes">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Notes
+      <span class="nav-badge" id="notes-count">0</span>
+    </div>
+    <div class="nav-item" data-panel="todo">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Tasks
+      <span class="nav-badge" id="tasks-count">0</span>
+    </div>
+  </div>
+  <div class="sb-footer">
+    <div class="sb-storage-label">
+      <span>Storage used</span>
+      <span id="storage-pct">0%</span>
+    </div>
+    <div class="sb-storage-bar"><div class="sb-storage-fill" id="storage-fill" style="width:0%"></div></div>
+    <div class="sb-version">Notiq v2.0 · All data stored locally</div>
+  </div>
+</nav>
+
+<!-- TOPBAR -->
+<header id="topbar">
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+  <div class="page-title" id="page-title">Dashboard</div>
+  <div class="search-wrap">
+    <svg class="search-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input type="text" id="search-input" placeholder="Search notes..." autocomplete="off">
+  </div>
+  <div class="tb-actions">
+    <!-- THEME TOGGLE -->
+    <div class="theme-btn" id="theme-toggle" title="Toggle dark/light mode">
+      <div class="theme-btn-track">
+        <span>🌙</span>
+        <span>☀️</span>
+      </div>
+      <div class="theme-btn-knob">
+        <span class="theme-btn-icon" id="theme-icon">🌙</span>
+      </div>
+    </div>
+    <button class="btn btn-p" id="add-btn">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      <span id="add-btn-label">New Note</span>
+    </button>
+  </div>
+</header>
+
+<!-- MAIN -->
+<main id="main">
+
+  <!-- DASHBOARD -->
+  <section class="panel active" id="panel-dashboard">
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-num" id="d-notes">0</div><div class="stat-lbl">Total Notes</div></div>
+      <div class="stat-card" data-c="orange"><div class="stat-num" id="d-tasks">0</div><div class="stat-lbl">Total Tasks</div></div>
+      <div class="stat-card" data-c="amber"><div class="stat-num" id="d-pending">0</div><div class="stat-lbl">Pending</div></div>
+      <div class="stat-card" data-c="red"><div class="stat-num" id="d-overdue">0</div><div class="stat-lbl">Overdue</div></div>
+    </div>
+    <div class="dash-row">
+      <div class="dash-card">
+        <div class="dash-card-title">
+          <span>📝 Recent Notes</span>
+          <span class="dash-card-link" data-panel="notes">View all →</span>
+        </div>
+        <div id="dash-notes-list"><div class="dash-empty">No notes yet</div></div>
+      </div>
+      <div class="dash-card">
+        <div class="dash-card-title">
+          <span>✅ Today's Tasks</span>
+          <span class="dash-card-link" data-panel="todo">View all →</span>
+        </div>
+        <div id="dash-tasks-list"><div class="dash-empty">No tasks yet</div></div>
+        <div class="todo-progress-wrap" id="dash-progress-wrap" style="display:none">
+          <div class="todo-progress-label">
+            <span>Progress</span>
+            <span id="dash-progress-pct">0%</span>
+          </div>
+          <div class="todo-progress-bar"><div class="todo-progress-fill" id="dash-progress-fill" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NOTES -->
+  <section class="panel" id="panel-notes">
+    <div class="notes-tb">
+      <div class="filter-tabs">
+        <div class="ftab active" data-filter="all">All</div>
+        <div class="ftab" data-filter="pinned">Pinned</div>
+        <div class="ftab" data-filter="reminder">Reminders</div>
+      </div>
+      <div class="view-tog">
+        <div class="vbtn active" id="vbtn-grid" title="Grid view">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        </div>
+        <div class="vbtn" id="vbtn-list" title="List view">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </div>
+      </div>
+      <select class="sort-select" id="sort-select">
+        <option value="updated">Sort: Recently edited</option>
+        <option value="created">Sort: Date created</option>
+        <option value="title">Sort: Title (A-Z)</option>
+        <option value="pinned">Sort: Pinned first</option>
+      </select>
+    </div>
+    <div class="notes-grid" id="notes-grid"></div>
+  </section>
+
+  <!-- TODO -->
+  <section class="panel" id="panel-todo">
+    <div class="todo-input-card">
+      <div class="todo-inp-row">
+        <div class="todo-inp-add-ico">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--orange-s)" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </div>
+        <input type="text" id="todo-input" placeholder="Add a new task… press Enter to save">
+      </div>
+      <div class="todo-meta-row">
+        <span class="prio-label">Priority:</span>
+        <div class="pchips">
+          <div class="pchip sel" data-p="medium">Medium</div>
+          <div class="pchip" data-p="high">High</div>
+          <div class="pchip" data-p="low">Low</div>
+        </div>
+        <input type="date" id="todo-due" title="Due date (optional)">
+        <button class="btn btn-p" id="todo-add-btn" style="margin-left:auto;padding:5px 14px">Add Task</button>
+      </div>
+    </div>
+
+    <div class="todo-controls">
+      <div class="filter-tabs">
+        <div class="ftab active" data-tf="all">All</div>
+        <div class="ftab" data-tf="active">Active</div>
+        <div class="ftab" data-tf="done">Done</div>
+        <div class="ftab" data-tf="high">🔴 High</div>
+        <div class="ftab" data-tf="today">📅 Today</div>
+      </div>
+      <span class="todo-stat-txt" id="todo-stat-txt"></span>
+      <button class="clear-btn" id="clear-done-btn">Clear done</button>
+    </div>
+
+    <div class="todo-list" id="todo-list"></div>
+  </section>
+
+</main>
+
+<!-- NOTE EDITOR MODAL -->
+<div class="modal-ov" id="note-modal-ov">
+  <div class="modal" id="note-modal">
+    <div class="modal-hd">
+      <span class="modal-hd-lbl" id="modal-lbl">New Note</span>
+      <div class="modal-hd-actions">
+        <div class="color-row" style="align-items:center;gap:6px">
+          <label style="font-size:10px;color:var(--text3);font-weight:500">Color:</label>
+          <div class="cdot sel" data-color="#f97316" style="background:#f97316" title="Orange"></div>
+          <div class="cdot" data-color="#ef4444" style="background:#ef4444" title="Red"></div>
+          <div class="cdot" data-color="#f59e0b" style="background:#f59e0b" title="Amber"></div>
+          <div class="cdot" data-color="#22c55e" style="background:#22c55e" title="Green"></div>
+          <div class="cdot" data-color="#60a5fa" style="background:#60a5fa" title="Blue"></div>
+          <div class="cdot" data-color="#ec4899" style="background:#ec4899" title="Pink"></div>
+          <div class="cdot" data-color="#a78bfa" style="background:#a78bfa" title="Purple"></div>
+        </div>
+      </div>
+      <button class="modal-close" id="modal-close-btn">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input type="text" id="note-title-inp" placeholder="Note title…" maxlength="120">
+      <div class="modal-div"></div>
+      <textarea id="note-body-inp" placeholder="Start writing your note…"></textarea>
+    </div>
+    <div class="modal-extra">
+      <div class="modal-field">
+        <label>REMINDER</label>
+        <input type="datetime-local" id="note-reminder" class="modal-input">
+      </div>
+      <div class="modal-field" style="display:flex;flex-direction:column;justify-content:flex-end">
+        <div class="pin-toggle-row">
+          <span class="pin-toggle-lbl">📌 Pin this note</span>
+          <div class="toggle-sw" id="pin-toggle"></div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <span class="modal-wc" id="modal-wc">0 words</span>
+      <span class="modal-shortcuts"><kbd>Ctrl</kbd>+<kbd>Enter</kbd> Save &nbsp; <kbd>Esc</kbd> Close</span>
+      <button class="btn btn-g" id="modal-cancel-btn" style="margin-left:12px">Cancel</button>
+      <button class="btn btn-p" id="modal-save-btn">Save Note</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT TASK MODAL -->
+<div class="modal-ov" id="task-modal-ov">
+  <div class="edit-task-modal">
+    <div class="edit-task-title">✏️ Edit Task</div>
+    <input type="text" class="etm-input" id="etm-text" placeholder="Task text…">
+    <div class="etm-row">
+      <span class="prio-label">Priority:</span>
+      <div class="pchips" id="etm-pchips">
+        <div class="pchip sel" data-p="medium">Medium</div>
+        <div class="pchip" data-p="high">High</div>
+        <div class="pchip" data-p="low">Low</div>
+      </div>
+      <input type="date" class="modal-input" id="etm-due" style="width:auto;flex-shrink:0">
+    </div>
+    <div class="etm-actions">
+      <button class="btn btn-g" id="etm-cancel">Cancel</button>
+      <button class="btn btn-p" id="etm-save">Save Task</button>
+    </div>
+  </div>
+</div>
+
+<!-- SNACKBAR -->
+<div id="snackbar">
+  <span id="snack-msg">Note deleted</span>
+  <span class="snack-undo" id="snack-undo">Undo</span>
+</div>
+
+<!-- NOTIFICATION BANNER -->
+<div id="notif-banner">
+  <div class="notif-title" id="notif-title">Reminder</div>
+  <div class="notif-body" id="notif-body"></div>
+</div>
+
