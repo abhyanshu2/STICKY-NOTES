@@ -1,9 +1,5 @@
 # NOTIQ — Sticky Notes & Task Manager
 
-> A fast, offline-first notes and to-do app that runs entirely in your browser. No login, no server, no database — just open it and start writing.
-
----
-
 ## Table of Contents
 
 1. [Project Idea (Why we built it)](#1-project-idea-why-we-built-it)
@@ -24,8 +20,6 @@
 16. [Troubleshooting](#16-troubleshooting)
 17. [Future Ideas](#17-future-ideas)
 
----
-
 ## 1. Project Idea (Why we built it)
 
 Most note apps want you to create an account, sync to a cloud, and learn a complicated interface before you can write a single line. Sometimes you just want a colourful sticky note and a checklist — instantly.
@@ -37,8 +31,6 @@ Most note apps want you to create an account, sync to a cloud, and learn a compl
 - **Your data stays with you** — everything is saved in your own browser (`localStorage`). Nothing is uploaded anywhere.
 
 It is also a learning project: the app started as a single-file HTML/CSS/JS app and is being migrated step by step to **React + Vite + Tailwind** while keeping the same look, behaviour and saved data.
-
----
 
 ## 2. Features at a Glance
 
@@ -59,8 +51,6 @@ It is also a learning project: the app started as a single-file HTML/CSS/JS app 
 | **Keyboard Shortcuts** | `Ctrl/Cmd + N`, `1`, `2`, `3`, `Ctrl + Enter`, `Esc` |
 | **Storage Meter** | Sidebar bar showing how much of the ~5 MB browser quota is used |
 | **Responsive** | Collapsible sidebar with hamburger menu on small screens |
-
----
 
 ## 3. Feature Deep Dive
 
@@ -143,8 +133,6 @@ Each feature below answers four questions: **What** it is, **How to use** it, **
 | `Esc` | Close the open editor |
 | `Enter` (in task box) | Add task |
 
----
-
 ## 4. Tech Stack and Why We Chose It
 
 | Technology | Role | Why we chose it |
@@ -157,8 +145,6 @@ Each feature below answers four questions: **What** it is, **How to use** it, **
 | **Web Storage (`localStorage`)** | Persistence | No backend needed; data survives refresh and restart |
 | **Notifications API** | Reminders | Native browser alerts for note reminders |
 | **Google Fonts** | Typography | *Syne* (headings) and *DM Sans* (body) |
-
----
 
 ## 5. Folder Structure
 
@@ -181,8 +167,6 @@ STICKY-NOTES/
 ```
 
 > **Migration status:** `index.html` currently contains the complete, working app. The `src/` files are the React migration (see [Known Limitations](#15-known-limitations)).
-
----
 
 ## 6. App Flow (Start to Finish)
 
@@ -208,8 +192,6 @@ Every change  ──►  update in-memory array  ──►  write to localStorag
    ▼
 Reminder time reached  ──►  in-app banner + browser notification  ──►  mark as notified
 ```
-
----
 
 ## 7. Setup Guide (Step by Step)
 
@@ -264,15 +246,11 @@ npm run preview
 | `npm run build` | Build the project for production |
 | `npm run preview` | Preview the production build locally |
 
----
-
 ## 8. Environment Variables
 
 **None required.** NOTIQ has no API keys, no secrets and no backend, so you do **not** need a `.env` file to run it.
 
 The `.gitignore` already excludes `.env` and `.env.*` (but allows `.env.example`), so if you add a backend or Firebase later, your secrets will not be committed by accident.
-
----
 
 ## 9. Firebase Setup
 
@@ -287,8 +265,6 @@ If you later want cloud sync and login, a typical path would be:
 5. Replace the `localStorage` read/write functions with Firestore reads/writes.
 
 See [Future Ideas](#17-future-ideas).
-
----
 
 ## 10. Deployment
 
@@ -311,8 +287,6 @@ NOTIQ is a static site, so any static host works.
 5. Deploy.
 
 > Since data is stored in each visitor's own browser, every person who opens your deployed link gets their own private, empty NOTIQ.
-
----
 
 ## 11. Data Model
 
@@ -359,8 +333,6 @@ All data is stored as JSON in `localStorage`.
 
 > The React rewrite in `src/App.jsx` currently uses a slightly different note shape (`content`, `tag`, `trashed`). See [Known Limitations](#15-known-limitations).
 
----
-
 ## 12. Security: How Safe Is It?
 
 | Topic | Status |
@@ -373,16 +345,12 @@ All data is stored as JSON in `localStorage`.
 
 **Bottom line:** Great for everyday notes and to-dos. Do **not** store passwords, card numbers or other highly sensitive information in it.
 
----
-
 ## 13. Mobile Support
 
 - Layout adapts to small screens.
 - The sidebar becomes a slide-in drawer opened with a **hamburger button**, with a dim overlay that closes it on tap.
 - Buttons, chips and colour dots are sized for touch.
 - Browser notifications on mobile depend on the browser and OS; in-app banners always work while the page is open.
-
----
 
 ## 14. Performance Notes
 
@@ -393,8 +361,6 @@ All data is stored as JSON in `localStorage`.
 - **Rendering:** the full app re-renders the visible list after each change, which is perfectly fast for hundreds of notes but is not designed for tens of thousands.
 - **Fonts:** Google Fonts need an internet connection on first load; the app falls back to system fonts offline.
 
----
-
 ## 15. Known Limitations
 
 - **No sync:** data is per-browser and per-device. Clearing site data deletes notes and tasks.
@@ -403,9 +369,7 @@ All data is stored as JSON in `localStorage`.
 - **Migration in progress:** `index.html` holds the complete working app, but it does not yet load `src/main.jsx`. The React files in `src/` are not connected to it, and `src/App.jsx` is a simplified version (no colour labels, reminders or full task manager yet).
 - **Data shape mismatch:** `App.jsx` and the full app both use the `notiq_notes_v1` key but store notes with different field names. Do not run both against the same browser data without a conversion step.
 - **No license specified:** add a `LICENSE` file if you want others to be able to reuse the code.
-
----
-
+  
 ## 16. Troubleshooting
 
 | Problem | Fix |
@@ -418,8 +382,6 @@ All data is stored as JSON in `localStorage`.
 | Reminders not alerting | Allow notifications for the site in your browser settings and keep the tab open |
 | Build errors | Read the terminal output, delete `node_modules` and `package-lock.json`, then run `npm install` again |
 | Blank page after deploy | Confirm the publish directory is `dist` and the build command is `npm run build` |
-
----
 
 ## 17. Future Ideas
 
@@ -436,12 +398,6 @@ All data is stored as JSON in `localStorage`.
 - Calendar view for due dates and reminders
 - Add a `LICENSE` (e.g. MIT)
 
----
-
 ## License
 
 No license is specified in the project files. Add a `LICENSE` file to define how others may use, modify or distribute this project.
-
----
-
-<p align="center">Made with ❤️ using React, Vite and Tailwind CSS</p>
