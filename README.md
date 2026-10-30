@@ -1,4 +1,4 @@
-# NOTIQ — Sticky Notes & Task Manager
+# NOTIQ Sticky Notes & Task Manager
 
 ## Table of Contents
 
@@ -22,7 +22,7 @@
 
 ## 1. Project Idea (Why we built it)
 
-Most note apps want you to create an account, sync to a cloud, and learn a complicated interface before you can write a single line. Sometimes you just want a colourful sticky note and a checklist — instantly.
+Most note apps want you to create an account, sync to a cloud, and learn a complicated interface before you can write a single line. Sometimes you just want a colourful sticky note and a checklist instantly.
 
 **NOTIQ** is built around three ideas:
 
@@ -60,7 +60,7 @@ Each feature below answers four questions: **What** it is, **How to use** it, **
 
 - **What:** Colourful cards holding a title and body text.
 - **How to use:** Click **New Note** (or press `Ctrl/Cmd + N`), type, pick a colour, click **Save**. Click any card to edit it.
-- **Why:** The core of the app — capture a thought in two seconds.
+- **Why:** The core of the app  capture a thought in two seconds.
 - **How it's built:** Notes live in a JavaScript array. Each save writes the whole array to `localStorage` and re-renders the grid. Text is HTML-escaped before rendering (`esc()` helper) so typed `<tags>` never run as code.
 
 ### 3.2 Colour Labels
