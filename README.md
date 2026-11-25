@@ -133,7 +133,7 @@ Each feature below answers four questions: **What** it is, **How to use** it, **
 | `Esc` | Close the open editor |
 | `Enter` (in task box) | Add task |
 
-## 4. Tech Stack and Why We Chose It
+## 4 Tech Stack and Why We Chose It
 
 | Technology | Role | Why we chose it |
 |------------|------|-----------------|
